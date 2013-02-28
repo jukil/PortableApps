@@ -7,3 +7,4 @@ Follow the development on portableapps.com:
 
 * [Challenger Portable](http://portableapps.com/node/36321)
 * [Win32 Disk Imager Portable](http://portableapps.com/node/36350)
+* [Zotero Standalone Portable](http://portableapps.com/node/36565)
