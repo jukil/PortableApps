@@ -1,7 +1,7 @@
 PortableApps
 ============
 
-Source code of portable apps for the portableapps.com platform. The paf installer should be downloaded from my public [Google Drive](http://drive.orzanna.de/).
+Source code of portable apps for the portableapps.com platform. The paf installer should be downloaded from my public [Drive](http://drive.orzanna.de/).
 
 Follow the development on portableapps.com:
 
