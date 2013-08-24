@@ -1,5 +1,5 @@
 Image Writer for Microsoft Windows
-Release 0.7 - Sourceforge Edition
+Release 0.9 - Unnamed Edition
 ======
 About:
 ======
@@ -9,9 +9,10 @@ removable device to write to.
 
 This utility can not write CD-ROMs.
 
-Future releases and source code available on our Sourceforge project:
+Future releases and source code are available on our Sourceforge project:
+http://sourceforge.net/projects/win32diskimager/
 
-This program is Beta , and has no warrranty. It may eat your files,
+This program is Beta , and has no warranty. It may eat your files,
 call you names, or explode in a massive shower of code. The authors take
 no responsibility for these possible events.
 
@@ -30,35 +31,38 @@ Short Version:
 =============
 New Features:
 =============
-This version adds the ability to copy the MD5sum to the clipboard for use in other
-apps.  When reading from an SD card, make sure the "MD5 Hash" checkbox is checked, and
-after the image is read, it will generate an MD5sum for you.  Click on the hash, and
-press <ctrl>-c or right-click on it and select Copy to save it to the clipboard.
+Added a custom file dialog box to solve the issues between opening a non-existant 
+file and saving a read-only file.
 
-Also of note, the program now defaults to the USERPROFILE Downloads directory for
-saving/loading images.  Due to a change in behavior from XP to Windows 7, to create a new
-image, it is now necessary to type the filename into the file window (as opposed to using
-the folder button to select a file).  If only a file name is typed, the program will save it
-as follows (using test.img as an example):
-Windows XP:  C:\Documents and Settings\<USER>\My Documents\Downloads\test.img
-Windows 7:   C:\Users\<USER>\Downloads\test.img
-(Note:  <USER> is the login name of the current user)
+Fixed bug LP:1118217 - can not select SD card to write image to on select computers.
+Fixed bug LP:1191156 File-Open dialog does not accept non-existing img files as target.
 
+=============
+Known Issues:
+=============
 
+*  Lack of reformat capabilities.
+*  Lack of file compression support
+*  Lack of an installer.  
+
+These are being looked into for future releases.
+
+======
 Legal:
+======
 Image Writer for Windows is licensed under the General Public
 License v2. The full text of this license is available in 
 GPL-2.
 
 This project uses and includes binaries of the MinGW runtime library,
-which is in the public domain.
+which is available at http://www.mingw.org
 
-This project uses and includes binaries of the Qt library from 
-http://www.qtsoftware.com/, licensed under the Library General Public 
-license. It is available at http://qt-project.org
+This project uses and includes binaries of the Qt library, licensed under the 
+"Library General Public License" and is available at 
+http://www.qt-project.org/.
 
 The license text is available in LGPL-2.1
 
 Original version developed by Justin Davis <tuxdavis@gmail.com>
-Maintained by the ImageWriter developers (https://launchpad.net/~image-writer-devs).
+Maintained by the ImageWriter developers (http://sourceforge.net/projects/win32diskimager).
 
