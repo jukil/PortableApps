@@ -56,7 +56,6 @@ const xpcomFilesLocal = [
 	'annotate',
 	'attachments',
 	'cite',
-	'commons',
 	'cookieSandbox',
 	'data_access',
 	'data/dataObjects',
@@ -78,7 +77,6 @@ const xpcomFilesLocal = [
 	'data/tags',
 	'db',
 	'duplicates',
-	'enstyle',
 	'fulltext',
 	'id',
 	'integration',
@@ -95,12 +93,16 @@ const xpcomFilesLocal = [
 	'style',
 	'sync',
 	'storage',
-	'storage/session',
+	'storage/streamListener',
+	'storage/queueManager',
+	'storage/queue',
+	'storage/request',
+	'storage/mode',
 	'storage/zfs',
 	'storage/webdav',
+	'syncedSettings',
 	'timeline',
 	'uri',
-	'zeroconf',
 	'translation/translate_item',
 	'translation/translator',
 	'server_connector'
@@ -118,10 +120,12 @@ const xpcomFilesConnector = [
 ];
 
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 var instanceID = (new Date()).getTime();
 var isFirstLoadThisSession = true;
 var zContext = null;
+var zInitOptions = {};
 
 ZoteroContext = function() {}
 ZoteroContext.prototype = {
@@ -162,11 +166,12 @@ ZoteroContext.prototype = {
 	 */
 	"switchConnectorMode":function(isConnector) {
 		if(isConnector !== this.isConnector) {
-			zContext.Zotero.shutdown();
-			
-			// create a new zContext
-			makeZoteroContext(isConnector);
-			zContext.Zotero.init();
+			Services.obs.notifyObservers(zContext.Zotero, "zotero-before-reload", isConnector ? "connector" : "full");
+			zContext.Zotero.shutdown().then(function() {
+				// create a new zContext
+				makeZoteroContext(isConnector);
+				zContext.Zotero.init(zInitOptions);
+			}).done();
 		}
 		
 		return zContext;
@@ -288,16 +293,15 @@ function ZoteroService() {
 		if(isFirstLoadThisSession) {
 			makeZoteroContext(false);
 			try {
-				zContext.Zotero.init();
+				zContext.Zotero.init(zInitOptions);
 			} catch(e) {
 				if(e === "ZOTERO_SHOULD_START_AS_CONNECTOR") {
 					// if Zotero should start as a connector, reload it
-					zContext.Zotero.shutdown();
-					makeZoteroContext(true);
-					zContext.Zotero.init();
+					zContext.Zotero.shutdown().then(function() {
+						makeZoteroContext(true);
+						zContext.Zotero.init(zInitOptions);
+					}).done();
 				} else {
-					dump(e.toSource());
-					Components.utils.reportError(e);
 					throw e;
 				}
 			}
@@ -342,6 +346,16 @@ function ZoteroCommandLineHandler() {}
 ZoteroCommandLineHandler.prototype = {
 	/* nsICommandLineHandler */
 	handle : function(cmdLine) {
+		// Force debug output
+		if (cmdLine.handleFlag("zoterodebug", false)) {
+			zInitOptions.forceDebugLog = true;
+		}
+		
+		// handler to open Zotero pane at startup in Zotero for Firefox
+		if (!isStandalone() && cmdLine.handleFlag("ZoteroPaneOpen", false)) {
+			zInitOptions.openPane = true;
+		}
+		
 		// handler for Zotero integration commands
 		// this is typically used on Windows only, via WM_COPYDATA rather than the command line
 		var agent = cmdLine.handleFlagWithParam("ZoteroIntegrationAgent", false);
@@ -383,7 +397,7 @@ ZoteroCommandLineHandler.prototype = {
 							.createInstance(Components.interfaces.nsIProtocolHandler).newChannel(uri);
 					}
 				} else {
-					Zotero.debug("Not handling URL: "+uri.spec);
+					this.Zotero.debug("Not handling URL: "+uri.spec);
 				}
 			}
 			
@@ -399,15 +413,19 @@ ZoteroCommandLineHandler.prototype = {
 					this.Zotero.Styles.install(file);
 				} else {
 					// Ask before importing
+					var checkState = {"value":this.Zotero.Prefs.get('import.createNewCollection.fromFileOpenHandler')};
 					if(Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
 							.getService(Components.interfaces.nsIPromptService)
-							.confirm(null, this.Zotero.getString('ingester.importFile.title'),
-							this.Zotero.getString('ingester.importFile.text', [file.leafName]))) {
+							.confirmCheck(null, this.Zotero.getString('ingester.importFile.title'),
+							this.Zotero.getString('ingester.importFile.text', [file.leafName]),
+							this.Zotero.getString('ingester.importFile.intoNewCollection'), 
+							checkState)) {
 						// Perform file import in front window
 						var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
 										   .getService(Components.interfaces.nsIWindowMediator);
 						var browserWindow = wm.getMostRecentWindow("navigator:browser");
-						browserWindow.Zotero_File_Interface.importFile(file);
+						browserWindow.Zotero_File_Interface.importFile(file, checkState.value);
+						this.Zotero.Prefs.set('import.createNewCollection.fromFileOpenHandler', checkState.value);
 					}
 				}
 			}

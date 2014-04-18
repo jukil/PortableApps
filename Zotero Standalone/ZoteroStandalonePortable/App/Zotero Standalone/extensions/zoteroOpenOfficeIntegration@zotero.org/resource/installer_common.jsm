@@ -92,9 +92,10 @@ ZoteroPluginInstaller.prototype = {
 				return;
 			}
 			
+			var version = this.prefBranch.getCharPref("version");			
 			if(this.force || (
 					(
-						this.prefBranch.getCharPref("version") != this._version
+						versionComparator.compare(version, this._addon.LAST_INSTALLED_FILE_UPDATE) < 0
 						|| (!Zotero.isStandalone && !this.prefBranch.getBoolPref("installed"))
 					)
 					&& !this.prefBranch.getBoolPref("skipInstallation")
@@ -183,6 +184,42 @@ ZoteroPluginInstaller.prototype = {
 		installationInProgress = false;
 		this.closeProgressWindow();
 		if(!this.force && !dontSkipInstallation) this.prefBranch.setBoolPref("skipInstallation", true);
+	},
+
+	"showPreferences":function(document) {
+		var isInstalled = this.isInstalled(),
+			groupbox = document.createElement("groupbox");
+		groupbox.id = this._addon.EXTENSION_DIR;
+
+		var caption = document.createElement("caption");
+		caption.setAttribute("label", this._addon.APP);
+		groupbox.appendChild(caption);
+
+		var description = document.createElement("description");
+		description.style.width = "45em";
+		description.appendChild(document.createTextNode(
+			"The "+this._addon.APP+" add-in is "+(isInstalled ? "" : "not ")+"currently installed."));
+		groupbox.appendChild(description);
+
+		var hbox = document.createElement("hbox");
+		hbox.setAttribute("pack", "center");
+		var button = document.createElement("button"),
+			addon = this._addon;
+		button.setAttribute("label", (isInstalled ? "Reinstall" : "Install")+" "+this._addon.APP+" Add-in");
+		button.addEventListener("command", function() {
+			var zpi = new ZoteroPluginInstaller(addon, false, true);
+			zpi.showPreferences(document);
+		}, false);
+		hbox.appendChild(button);
+		groupbox.appendChild(hbox);
+
+		var tabpanel = document.getElementById("wordProcessors"),
+			old = document.getElementById(this._addon.EXTENSION_DIR);
+		if(old) {
+			tabpanel.replaceChild(groupbox, old);
+		} else {
+			tabpanel.insertBefore(groupbox, tabpanel.firstChild);
+		}
 	},
 	
 	"_firstRunListener":function() {

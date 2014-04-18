@@ -1,4 +1,4 @@
-57438
+57454
 0/nm
 0th/pt
 1/n1
@@ -3828,11 +3828,13 @@ DOS/M
 DOT
 DP/SM
 DPT
+DRM
 DST
 DTP
 DUI
 DVD
 DVDs
+DVR/S
 DWI
 Dacca/M
 Dacey/M
@@ -6817,6 +6819,7 @@ Heloise/M
 Helsa/M
 Helsinki/M
 Helvetian
+Helvetica
 Helvetius/M
 Helyn/M
 Hemingway/M
@@ -12766,6 +12769,8 @@ Reinhold/M
 Reinold/M
 Reinwald/M
 Rem/M
+Remanence/S
+Remanent
 Remarque
 Rembrandt/M
 Remington
@@ -17676,7 +17681,7 @@ androgenic
 androgynous
 androgyny/M
 android/SM
-anecdotal
+anecdotal/Y
 anecdote/MS
 anechoic
 anemia/M
@@ -18768,6 +18773,7 @@ autobiographic
 autobiographical/Y
 autobiography/SM
 autoclave/MS
+autocomplete/S
 autocracy/SM
 autocrat/SM
 autocratic
@@ -18809,6 +18815,7 @@ availabilities
 availability/UM
 available/U
 avalanche/SM
+avant-garde
 avarice/M
 avaricious/YP
 avast
@@ -25102,6 +25109,7 @@ cue/DSMG
 cuff/MDGS
 cufflink/SM
 cuisine/SM
+cul-de-sac
 culinary
 cull/MDGS
 cullender/MS
@@ -35362,6 +35370,7 @@ interrogatory/SM
 interrupt/ZGMDRS
 interrupter/M
 interruptibility
+interruptible/U
 interruption/MS
 interscholastic
 intersect/GDS
@@ -38829,6 +38838,7 @@ migraine/MS
 migrant/MS
 migrate/AGDS
 migration/SM
+migrator/SM
 migratory
 mikado/MS
 mike/MGDS
@@ -38872,6 +38882,7 @@ milky/RTP
 mill/MDRSZGJ
 millage/M
 millenarian
+millennia
 millennial
 millennium/SM
 millepede/MS
@@ -44936,6 +44947,7 @@ professorship/MS
 proffer/GMDS
 proficiency/SM
 proficient/MYS
+profiler/SM
 profit/BGD
 profitability/M
 profitable/U
@@ -44966,6 +44978,7 @@ program/ZGMDRS
 programer/M
 programmable/SM
 programmatic
+programmatically
 programmed/CA
 programmer/MS
 programming/MS
@@ -46277,6 +46290,7 @@ recur/S
 recurred
 recurrence/SM
 recurring
+recurse/DGSV
 recursion/S
 recuse/DGS
 recyclable/MS
@@ -46797,7 +46811,6 @@ resistivity
 resistless
 resistor/MS
 resitting
-resizing
 resold
 resole/DSG
 resolute/XPYTNR
@@ -48667,6 +48680,7 @@ sequester/GSD
 sequestrate/XDSGN
 sequestration/M
 sequin/SMD
+sequitur
 sequoia/MS
 seraglio/MS
 serape/SM
@@ -49481,7 +49495,7 @@ sixths
 sixtieth/M
 sixtieths
 sixty/SMH
-size/MGBDRS
+size/AMGBDRS
 sizing/M
 sizzle/DRSMZG
 ska/M
@@ -50500,8 +50514,10 @@ spellbinder/M
 spellbound
 spellchecker/S
 spelldown/SM
+spelled
 speller/M
 spelling/M
+spelt
 spelunker/MS
 spelunking/M
 spend/BSRZG
@@ -53627,7 +53643,7 @@ too
 took/A
 tool's
 tool/ADGS
-toolbar
+toolbar/MS
 toolbox/MS
 toolkit
 toolmaker/MS

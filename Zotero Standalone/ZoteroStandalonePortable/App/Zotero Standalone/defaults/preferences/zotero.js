@@ -6,6 +6,8 @@
 pref("extensions.zotero.firstRun2", true);
 pref("extensions.zotero@chnm.gmu.edu.description", "chrome://zotero/locale/zotero.properties");
 
+pref("extensions.zotero.saveRelativeAttachmentPath", false);
+pref("extensions.zotero.baseAttachmentPath", '');
 pref("extensions.zotero.useDataDir", false);
 pref("extensions.zotero.dataDir", '');
 pref("extensions.zotero.lastDataDir", '');
@@ -19,6 +21,9 @@ pref("extensions.zotero.debug.level",5);
 pref("extensions.zotero.debug.time", false);
 pref("extensions.zotero.automaticScraperUpdates",true);
 pref("extensions.zotero.zoteroDotOrgVersionHeader", true);
+pref("extensions.zotero.triggerProxyAuthentication", true);
+// Proxy auth URLs should respond successfully to HEAD requests over HTTP and HTTPS (in case of forced HTTPS requests)
+pref("extensions.zotero.proxyAuthenticationURLs", 'http://www.acm.org,http://www.ebscohost.com,http://www.elsevier.com,http://www.ieee.org,http://www.jstor.org,http://www.ovid.com,http://www.springer.com,http://www.tandfonline.com');
 pref("extensions.zotero.cacheTranslatorData",true);
 pref("extensions.zotero.showIn", 1);
 pref("extensions.zotero.statusBarIcon", 2);
@@ -62,14 +67,15 @@ pref("extensions.zotero.tagCloud", false);
 // Keyboard shortcuts
 pref("extensions.zotero.keys.openZotero", 'Z');
 pref("extensions.zotero.keys.toggleFullscreen", 'F');
-pref("extensions.zotero.keys.library", 'L');
-pref("extensions.zotero.keys.quicksearch", 'K');
+pref("extensions.zotero.keys.saveToZotero", 'S');
 pref("extensions.zotero.keys.newItem", 'N');
 pref("extensions.zotero.keys.newNote", 'O');
-pref("extensions.zotero.keys.toggleTagSelector", 'T');
+pref("extensions.zotero.keys.importFromClipboard", 'V');
+pref("extensions.zotero.keys.library", 'L');
+pref("extensions.zotero.keys.quicksearch", 'K');
 pref("extensions.zotero.keys.copySelectedItemCitationsToClipboard", 'A');
 pref("extensions.zotero.keys.copySelectedItemsToClipboard", 'C');
-pref("extensions.zotero.keys.importFromClipboard", 'V');
+pref("extensions.zotero.keys.toggleTagSelector", 'T');
 
 // Fulltext indexing
 pref("extensions.zotero.fulltext.textMaxLength", 500000);
@@ -91,9 +97,11 @@ pref("extensions.zotero.export.translatorSettings", 'true,false');
 pref("extensions.zotero.export.lastStyle", 'http://www.zotero.org/styles/chicago-note-bibliography');
 pref("extensions.zotero.export.bibliographySettings", 'save-as-rtf');
 pref("extensions.zotero.export.bibliographyLocale", '');
-pref("extensions.zotero.export.citePaperJournalArticleURL", false);
 pref("extensions.zotero.export.displayCharsetOption", false);
+pref("extensions.zotero.export.citePaperJournalArticleURL", false);
+pref("extensions.zotero.cite.automaticJournalAbbreviations", true);
 pref("extensions.zotero.import.charset", "auto");
+pref("extensions.zotero.import.createNewCollection.fromFileOpenHandler", true);
 pref("extensions.zotero.rtfScan.lastInputFile", "");
 pref("extensions.zotero.rtfScan.lastOutputFile", "");
 
@@ -117,11 +125,6 @@ pref("extensions.zotero.httpServer.port", 23119);	// ascii "ZO"
 // Zeroconf
 pref("extensions.zotero.zeroconf.server.enabled", false);
 
-// Zotero Commons
-pref("extensions.zotero.commons.enabled", false);
-pref("extensions.zotero.commons.accessKey", '');
-pref("extensions.zotero.commons.secretKey", '');
-
 // Annotation settings
 pref("extensions.zotero.annotations.warnOnClose", true);
 
@@ -139,6 +142,9 @@ pref("extensions.zotero.sync.storage.maxDownloads", 4);
 pref("extensions.zotero.sync.storage.maxUploads", 2);
 pref("extensions.zotero.sync.storage.deleteDelayDays", 30);
 pref("extensions.zotero.sync.storage.groups.enabled", true);
+pref("extensions.zotero.sync.storage.downloadMode.personal", "on-sync");
+pref("extensions.zotero.sync.storage.downloadMode.groups", "on-sync");
+pref("extensions.zotero.sync.fulltext.enabled", true);
 
 // Proxy
 pref("extensions.zotero.proxies.autoRecognize", true);
@@ -165,3 +171,9 @@ pref("extensions.zotero.connector.repo.lastCheck.repoTime", 0);
 // File/URL opening executable if launch() fails
 pref("extensions.zotero.fallbackLauncher.unix", "/usr/bin/xdg-open");
 pref("extensions.zotero.fallbackLauncher.windows", "");
+
+//Translators
+pref("extensions.zotero.translators.attachSupplementary", false);
+pref("extensions.zotero.translators.supplementaryAsLink", false);
+pref("extensions.zotero.translators.RIS.import.ignoreUnknown", false);
+pref("extensions.zotero.translators.RIS.import.keepID", false);

@@ -13,9 +13,6 @@ pref("network.prefetch-next", false);
 // Let operations run as long as necessary
 pref("dom.max_chrome_script_run_time", 0);
 
-// Enable JaegerMonkey
-pref("javascript.options.methodjit.chrome", true);
-
 // Use OS locale
 pref("intl.locale.matchOS", true);
 
@@ -71,7 +68,7 @@ pref("places.history.enabled", false);
 // Preferences to allow updating add-ons from AMO
 // TODO: Does this work for Standalone, or do we need to pretend to be Firefox?
 pref("extensions.update.enabled", true);
-pref("extensions.update.url", "https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID={ec8030f7-c20a-464f-9b0e-13a3a9e97384}&appVersion=19.0&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=19.0&updateType=%UPDATE_TYPE%");
+pref("extensions.update.url", "https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID={ec8030f7-c20a-464f-9b0e-13a3a9e97384}&appVersion=28.0&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=28.0&updateType=%UPDATE_TYPE%");
 pref("extensions.update.interval", 86400);
 pref("extensions.update.autoUpdateDefault", true);
 
